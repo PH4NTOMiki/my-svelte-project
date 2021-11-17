@@ -9,7 +9,7 @@ import ChatMessage from './ChatMessage'
 
 	(async() => {
 		let {data} = await supabase.from('messages').select().order('createdAt', { ascending: false }).limit(10);
-		messages = data.reverse();
+		messages = data.reverse();setTimeout(function(){document.getElementById('dummy').scrollIntoView();}, 240);
 		console.log(messages);
 	})();
 
@@ -18,7 +18,7 @@ import ChatMessage from './ChatMessage'
 			$subscription= supabase.from('messages').on('INSERT', (data)=>{
 				if(data.new){
 					messages = [...messages,data.new];
-					document.getElementById('dummy').scrollIntoView();
+					setTimeout(function(){document.getElementById('dummy').scrollIntoView();}, 240);
 				}
 			}).subscribe();
 		}
