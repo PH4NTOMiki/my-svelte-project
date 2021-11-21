@@ -14,6 +14,12 @@ import { writable } from 'svelte/store';
   })
   .subscribe();*/
 
+  window.addEventListener('hashchange', () => {
+			if(window.location.href.slice(-1) == "#"){
+				window.history.replaceState(window.history.state, document.title, window.location.href.slice(0,-1));
+			}
+		});
+
 supabase.auth.onAuthStateChange((event, session) => {
   console.log(event, session);
   $user = session && session.user ? session.user : null;
